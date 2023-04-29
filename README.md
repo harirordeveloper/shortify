@@ -13,4 +13,7 @@ Step 3: $ rake db:migrate
 Step 4: $ rails s
 
 ## IMPORTANT
-Please read the API documentation at https://documenter.getpostman.com/view/26791774/2s93eSYaVt
+
+This application is Deployed at **https://shortly.fly.dev** to make it accessible without need of setting it up in local.
+
+Please read the API documentation at **https://documenter.getpostman.com/view/26791774/2s93eSZFJs**
