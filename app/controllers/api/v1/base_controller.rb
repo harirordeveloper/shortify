@@ -10,7 +10,7 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def current_user
-    @current_user ||= User.find_by(id: jwt_decode(token)['user_id'])
+    @current_user ||= User.find_by(id: jwt_decode(token)['user_id'], jti: jwt_decode(token)['jti'])
   end
 
   def token
@@ -30,7 +30,9 @@ class Api::V1::BaseController < ApplicationController
   end
 
   def render_access_token user_id, status
-    access_token = jwt_encode({user_id: user_id})
+    user = User.find_by(id: user_id)
+    user.revoke_jwt
+    access_token = jwt_encode({ user_id: user_id, jti: user.jti })
     render json: { access_token: access_token }, status: status
   end
 end

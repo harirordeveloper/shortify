@@ -9,4 +9,13 @@ class Api::V1::SessionsController < Api::V1::BaseController
       render_error 'Invalid email or password', :unprocessable_entity
     end
   end
+
+  def destroy
+    if current_user.present?
+      current_user.revoke_jwt
+      render json: { message: "Logedout Successfully!" }, status: :ok
+    else
+      render_error 'No Active session for this user!', :unauthorized
+    end
+  end
 end

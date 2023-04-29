@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       post '/signup', to: 'users#create'
       post '/signin', to: 'sessions#create'
+      delete '/signout', to: 'sessions#destroy'
       resource :urls do
         get :index
       end
